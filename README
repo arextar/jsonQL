@@ -1,70 +1,75 @@
 Example use: (example object from csonv.js)
-
-dat=[
-    {
-        "id": 1,
-        "name": "To Kill an Angry Bird",
-        "author": {
+    
+    dat=[
+        {
             "id": 1,
-            "name": "Harper Lee",
-            "written_books": [
-                {
-                    "$ref": "$[0]"
-                }
-            ]
-        }
-    },
-    {
-        "id": 2,
-        "name": "The Rabbit",
-        "author": {
-            "id": 2,
-            "name": "JRR Tolkien",
-            "written_books": [
-                {
-                    "$ref": "$[1]"
-                },
-                {
-                    "id": 4,
-                    "name": "The Lord of the Things",
-                    "author": {
-                        "$ref": "$[1][\"author\"]"
+            "name": "To Kill an Angry Bird",
+            "author": {
+                "id": 1,
+                "name": "Harper Lee",
+                "written_books": [
+                    {
+                        "$ref": "$[0]"
                     }
-                }
-            ]
-        }
-    },
-    {
-        "id": 3,
-        "name": "Parslet",
-        "author": {
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "name": "The Rabbit",
+            "author": {
+                "id": 2,
+                "name": "JRR Tolkien",
+                "written_books": [
+                    {
+                        "$ref": "$[1]"
+                    },
+                    {
+                        "id": 4,
+                        "name": "The Lord of the Things",
+                        "author": {
+                            "$ref": "$[1][\"author\"]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "id": 3,
-            "name": "William Shakespeare",
-            "written_books": [
-                {
-                    "$ref": "$[2]"
-                }
-            ]
+            "name": "Parslet",
+            "author": {
+                "id": 3,
+                "name": "William Shakespeare",
+                "written_books": [
+                    {
+                        "$ref": "$[2]"
+                    }
+                ]
+            }
+        },
+        {
+            "$ref": "$[1][\"author\"][\"written_books\"][1]"
+        },
+        {
+            "id": 5,
+            "name": "The Michelangelo Code",
+            "author": {
+                "id": 4,
+                "name": "Dan Brown",
+                "written_books": [
+                    {
+                        "$ref": "$[4]"
+                    }
+                ]
+            }
         }
-    },
-    {
-        "$ref": "$[1][\"author\"][\"written_books\"][1]"
-    },
-    {
-        "id": 5,
-        "name": "The Michelangelo Code",
-        "author": {
-            "id": 4,
-            "name": "Dan Brown",
-            "written_books": [
-                {
-                    "$ref": "$[4]"
-                }
-            ]
-        }
+    ]
+    
+    jsonQuery(dat).select("author.id").where("name").like("To").get()
+    
+    Built to be used with csonv.js library (https://github.com/archan937/csonv.js)
+
+How to extend:
+    jsonQuery.test.has=function(a,b){
+        return a[b];
     }
-]
-
-jsonQuery(dat).select("author.id").where("name").like("To").get()
-
-Built to be used with csonv.js library (https://github.com/archan937/csonv.js)
