@@ -90,17 +90,17 @@ function jsonQuery(data){
 }
 
 var testFns=jsonQuery.test={
-    eq:function(a,b){
-        return a==b;
+    eq:function(a, b){
+        return a == b;
     },
     lt:function(a,b){
-        return a<b;
+        return a < b;
     },
     gt:function(a,b){
-        return a>b;
+        return a > b;
     },
     like:function(a,b){
-        return (""+a).indexOf(b)>=0
+        return ~(""+a).indexOf(b)
     },
     is:function(a,b){
         return b(a);
