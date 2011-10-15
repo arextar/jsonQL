@@ -76,12 +76,14 @@ function jsonQuery(data){
     
     return {
         select:function(what){
-            return filter(data,function(row){
-                return get(row,what);
+            return filter(data, function(row){
+                return get(row, what);
             })
         },
         update:function(what){
-            
+            return filter(data, function(row){
+                return set(row, what);
+            })
         }
     }
     
